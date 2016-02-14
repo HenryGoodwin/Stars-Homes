@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,7 +17,50 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch" translatesAutoresizingMaskIntoConstraints="NO" id="iPn-hT-jFO">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Warning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09r-oC-zhd">
+                                <rect key="frame" x="20" y="20" width="560" height="47"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="ddR-1I-Imx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="40"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hgU-Fb-DY3">
+                                <rect key="frame" x="20" y="75" width="560" height="157"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="157" id="tEf-c9-8fB"/>
+                                </constraints>
+                                <string key="text">Feel Free Too Drive Around And Look At The Homes, But Remeber These Are Private Homes, Do Not Destrurb The Residences, Do Not Trespass Onto Private Property, Do Not Attempt To Enter The Homes</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Stars Homes Logo" translatesAutoresizingMaskIntoConstraints="NO" id="n20-up-HRi">
+                                <rect key="frame" x="20" y="240" width="560" height="340"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="09r-oC-zhd" firstAttribute="leading" secondItem="hgU-Fb-DY3" secondAttribute="leading" id="4hs-Qt-aiz"/>
+                            <constraint firstItem="n20-up-HRi" firstAttribute="trailing" secondItem="hgU-Fb-DY3" secondAttribute="trailing" id="5wD-Kb-vif"/>
+                            <constraint firstItem="iPn-hT-jFO" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" id="AHg-qL-qR3"/>
+                            <constraint firstItem="09r-oC-zhd" firstAttribute="trailing" secondItem="hgU-Fb-DY3" secondAttribute="trailing" id="KcA-jy-1vB"/>
+                            <constraint firstItem="hgU-Fb-DY3" firstAttribute="leading" secondItem="n20-up-HRi" secondAttribute="leading" id="MP4-vJ-qf7"/>
+                            <constraint firstItem="n20-up-HRi" firstAttribute="top" secondItem="hgU-Fb-DY3" secondAttribute="bottom" constant="8" symbolic="YES" id="RP8-J0-gXl"/>
+                            <constraint firstItem="iPn-hT-jFO" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="RQ1-vq-j4m"/>
+                            <constraint firstItem="09r-oC-zhd" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="S6G-SA-aGt"/>
+                            <constraint firstItem="hgU-Fb-DY3" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="WX5-mq-2pI"/>
+                            <constraint firstItem="hgU-Fb-DY3" firstAttribute="top" secondItem="09r-oC-zhd" secondAttribute="bottom" constant="8" symbolic="YES" id="dXw-kd-rPM"/>
+                            <constraint firstItem="hgU-Fb-DY3" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="fvV-Ii-U7P"/>
+                            <constraint firstAttribute="bottom" secondItem="n20-up-HRi" secondAttribute="bottom" constant="20" symbolic="YES" id="iTM-68-Qe0"/>
+                            <constraint firstItem="iPn-hT-jFO" firstAttribute="centerX" secondItem="n20-up-HRi" secondAttribute="centerX" id="iUZ-Ih-8bb"/>
+                            <constraint firstItem="iPn-hT-jFO" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="suD-Dt-K0R"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -24,4 +68,8 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Launch" width="3726" height="6624"/>
+        <image name="Stars Homes Logo" width="1890" height="383"/>
+    </resources>
 </document>

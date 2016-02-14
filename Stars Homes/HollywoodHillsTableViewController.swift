@@ -1,23 +1,31 @@
 //
-//  MasterViewController.swift
+//  HollywoodHillsTableViewController.swift
 //  Stars Homes
 //
-//  Created by Henry Goodwin on 5/01/2016.
+//  Created by Henry Goodwin on 25/01/2016.
 //  Copyright © 2016 Henry Goodwin. All rights reserved.
 //
 
 import UIKit
 import iAd
 
-class MasterViewController: UITableViewController, ADBannerViewDelegate {
+class HollywoodHillsTableViewController: UITableViewController, ADBannerViewDelegate {
     
     @IBOutlet var adBannerView: ADBannerView?
-    
+
     // MARK: - Properties
     var detailViewController: DetailViewController? = nil
     var House = [Home]()
     var filteredHouse = [Home]()
     let searchController = UISearchController(searchResultsController: nil)
+    
+    struct Objects {
+        var sectionName: String!
+        var sectionObjects: [String]!
+    }
+    
+    var objectsArray = [Objects]()
+    
     
     // MARK: - View Setup
     override func viewDidLoad() {
@@ -34,37 +42,43 @@ class MasterViewController: UITableViewController, ADBannerViewDelegate {
         searchController.dimsBackgroundDuringPresentation = false
         
         // Setup the Scope Bar
-        searchController.searchBar.scopeButtonTitles = ["All", "Film & TV", "Music", "Sport", "Icon", "Other"]
+        searchController.searchBar.scopeButtonTitles = ["All", "Film & TV", "Music", "Sport", "Other"]
         tableView.tableHeaderView = searchController.searchBar
-
+        
         
         House = [
-            //Beverly Hills
-            //Madonna
             
-            Home(category:"Other", name:"Christian Audigier", URL: "https://en.wikipedia.org/wiki/Christian_Audigier", pinLatitude: 34.063654 , pinLongitude : -118.329737, pinDetail : "600 S Muirfield Rd, Beverly Hills", pinTitle: "Christian Audigier"),
+        Home(category:"Film & TV", name:"Jason Bateman", URL: "https://en.wikipedia.org/wiki/Jason_Bateman", pinLatitude: 34.113902 , pinLongitude : -118.387308, pinDetail : "8828 Wonderland Park Ave, Hollywood Hills", pinTitle: "Jason Bateman"),
             
-            Home(category:"Film & TV", name:"Hank Azaria", URL: "https://en.wikipedia.org/wiki/Hank_Azaria", pinLatitude: 34.110087 , pinLongitude : -118.418868, pinDetail : "2120 N Beverly Dr, Beverly Hills", pinTitle: "Hank Azaria"),
+        Home(category:"Film & TV", name:"Jack Black", URL: "https://en.wikipedia.org/wiki/Jack_Black", pinLatitude: 34.117854 , pinLongitude :  -118.382431, pinDetail : "8538 Eastwood Rd, Hollywood Hills", pinTitle: "Jack Black"),
             
-             Home(category:"Film & TV", name:"Walt Disney", URL: "https://en.wikipedia.org/wiki/Walt_Disney", pinLatitude: 34.084795 , pinLongitude : -118.429003, pinDetail : "355 Carolwood Drive, Beverly Hills", pinTitle: "Walt Disney (1901 - 1966)"),
+        Home(category:"Film & TV", name:"Kate Bosworth", URL: "https://en.wikipedia.org/wiki/Kate_Bosworth", pinLatitude: 34.118633 , pinLongitude :  -118.356116, pinDetail : "2633 La Cuesta Dr, Hollywood Hills", pinTitle: "Kate Bosworth"),
             
-            Home(category:"Iconic", name:"Modern Family Cam & Mitch", URL: "https://en.wikipedia.org/wiki/Modern_Family", pinLatitude: 34.051841 , pinLongitude : -118.416272, pinDetail : "2211 Fox Hills Dr, Beverly Hills", pinTitle: "Modern Family Cam & Mitch"),
+        Home(category:"Sport", name:"Reggie Bush", URL: "https://en.wikipedia.org/wiki/Reggie_Bush", pinLatitude: 34.098247 , pinLongitude : -118.382715, pinDetail : "1501 Viewsite Ter, Hollywood Hills", pinTitle: "Reggie Bush"),
             
-            Home(category:"Iconic", name:"Modern Family Phil & Claire", URL: "https://en.wikipedia.org/wiki/Modern_Family", pinLatitude: 34.036356 , pinLongitude : -118.410230, pinDetail : "10336 Dunleer Dr, Beverly Hills", pinTitle: "Modern Family Phil & Claire"),
+         Home(category:"Music", name:"Dr. Dre", URL: "https://en.wikipedia.org/wiki/Dr._Dre", pinLatitude: 34.095974 , pinLongitude : -118.389796, pinDetail : "9161 Oriole Way, Hollwood Hills", pinTitle: "Dr. Dre"),
             
-            Home(category:"Music", name:"John Fogerty", URL: "https://en.wikipedia.org/wiki/John_Fogerty", pinLatitude: 34.119185 , pinLongitude : -118.426535, pinDetail : "9754 Oak Pass Rd, Beverly Hills", pinTitle: "John Fogerty"),
+        Home(category:"Film & TV", name:"Zac Efron", URL: "https://en.wikipedia.org/wiki/Zac_Efron", pinLatitude: 34.122490 , pinLongitude : -118.367484, pinDetail : "7861 Woodrow Wilson Dr, Hollwood Hills", pinTitle: "Zac Efron"),
             
-            Home(category:"Film & TV", name:"Harrison Ford", URL: "https://en.wikipedia.org/wiki/Harrison_Ford", pinLatitude: 34.096974 , pinLongitude : -118.420953, pinDetail : "1420 Braeridge Drive, Beverly Hills", pinTitle: "Harrison Ford"),
+        Home(category:"Film & TV", name:"Megan Fox", URL: "https://en.wikipedia.org/wiki/Megan_Fox", pinLatitude: 34.114836 , pinLongitude :  -118.296151, pinDetail : "2771 Glendower Ave, Los Feliz", pinTitle: "Brian Austin Green & Megan Fox’s House"),
             
-            Home(category:"Music", name:"Madonna", URL: "https://en.wikipedia.org/wiki/Madonna_(entertainer)", pinLatitude: 34.0872054 , pinLongitude : -118.3994811, pinDetail : "9425 Sunset Blvd, Beverly Hills", pinTitle: "Madonna"),
+        Home(category:"Film & TV", name:"Jeff Franklin", URL: "https://en.wikipedia.org/wiki/Jeff_Franklin", pinLatitude: 34.094353 , pinLongitude : -118.383226, pinDetail : "1302 Collingwood Place, Beverly Hills", pinTitle: "Jeff Franklin"),
             
-            Home(category:"Film & TV", name:"Eddie Murphy", URL: "https://en.wikipedia.org/wiki/Eddie_Murphy", pinLatitude: 34.0991198 , pinLongitude : -118.3969917, pinDetail : "1081 Wallace Ridge, Beverly Hills", pinTitle: "Eddie Murphy"),
+        Home(category:"Film & TV", name:"Brian Austin Green", URL: "hhttps://en.wikipedia.org/wiki/Brian_Austin_Green", pinLatitude: 34.114836 , pinLongitude :  -118.296151, pinDetail : "2771 Glendower Ave, Los Feliz", pinTitle: "Brian Austin Green & Megan Fox’s House"),
             
-            //Elvis Presley
-            Home(category:"Music", name:"Elvis Presley", URL: "https://en.wikipedia.org/wiki/Elvis_Presley", pinLatitude: 34.097919 , pinLongitude : -118.3969712, pinDetail : "Elvis lived here from November 1967 until sometime in 1970", pinTitle: "Elvis Presley (1935-1977)"),
+        Home(category:"Film & TV", name:"Jake Gyllenhaal", URL: "https://en.wikipedia.org/wiki/Jake_Gyllenhaal", pinLatitude: 34.124929, pinLongitude :  -118.355291, pinDetail : "17411 Woodrow Wilson Dr, Hollywood Hills", pinTitle: "Jake Gyllenhaal"),
+            
+        Home(category:"Music", name:"John Legend",URL: "https://en.wikipedia.org/wiki/John_Legend", pinLatitude: 34.124322 , pinLongitude : -118.339005, pinDetail : "3023 Longdale Ln, Hollywood Hills", pinTitle: "John Legend"),
+            
+        Home(category:"Film & TV", name:"Justin Long",URL: "https://en.wikipedia.org/wiki/Justin_Long", pinLatitude: 34.110926 , pinLongitude :  -118.313095, pinDetail : "5682 Holly Oak Dr, Hollywood Hills", pinTitle: "Justin Long"),
+            
+        Home(category:"Film & TV", name:"Christopher Meloni", URL: "https://en.wikipedia.org/wiki/Christopher_Meloni", pinLatitude: 34.104265 , pinLongitude : -118.349960 , pinDetail : "1822 Camino Palmero St, Hollywood Hills", pinTitle: "Christopher Meloni"),
+            
+        Home(category:"Film & TV", name:"Eva Mendes", URL: "https://en.wikipedia.org/wiki/Eva_Mendes", pinLatitude: 34.116675 , pinLongitude : -118.318562 , pinDetail : "2732 Hollyridge Dr, Hollywood Hills", pinTitle: "Eva Mendes"),
         
-        Home(category:"Other", name:"Markus Persson", URL: "https://en.wikipedia.org/wiki/Markus_Persson", pinLatitude: 34.097244, pinLongitude :  -118.394545 , pinDetail : "1181 N Hillcrest Rd, Beverly Hills", pinTitle: "Markus Persson"),]
+        Home(category:"Other", name:"Jack Osbourne", URL: "https://en.wikipedia.org/wiki/Jack_Osbourne", pinLatitude: 34.111421, pinLongitude : -118.294152 , pinDetail : "2220 N Berendo St, Los Feliz", pinTitle: "Jack Osbourne"),
         
+        Home(category:"Music", name:"Kelly Osbourne", URL: "https://en.wikipedia.org/wiki/Kelly_Osbourne", pinLatitude: 34.099357, pinLongitude : -118.369727 , pinDetail : "8281 Hollywood Blvd, Hollywood Hills", pinTitle: "Kelly Osbourne"),]
         
         
         if let splitViewController = splitViewController {
@@ -119,7 +133,7 @@ class MasterViewController: UITableViewController, ADBannerViewDelegate {
     
     // MARK: - Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showDetail" {
+        if segue.identifier == "showDetailHW" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let house: Home
                 if searchController.active && searchController.searchBar.text != "" {
@@ -153,18 +167,18 @@ class MasterViewController: UITableViewController, ADBannerViewDelegate {
     
 }
 
-extension MasterViewController: UISearchBarDelegate {
+extension HollywoodHillsTableViewController: UISearchBarDelegate {
     // MARK: - UISearchBar Delegate
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
 }
 
-extension MasterViewController: UISearchResultsUpdating {
+extension HollywoodHillsTableViewController: UISearchResultsUpdating {
     // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
         filterContentForSearchText(searchController.searchBar.text!, scope: scope)
-    }
+}
 }

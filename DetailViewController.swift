@@ -9,16 +9,17 @@
 import UIKit
 import MapKit
 import CoreLocation
+import iAd
 
 
-class DetailViewController: UIViewController,MKMapViewDelegate, CLLocationManagerDelegate {
+class DetailViewController: UIViewController,MKMapViewDelegate, CLLocationManagerDelegate, ADBannerViewDelegate {
     
     // MARK: - Properties
 
     
     
     
-    @IBOutlet var k: UIBarButtonItem!
+    @IBOutlet var adBannerView: ADBannerView?
     @IBOutlet weak var DescriptionLabel: UILabel!
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet var Controller: UISegmentedControl!
@@ -107,18 +108,26 @@ class DetailViewController: UIViewController,MKMapViewDelegate, CLLocationManage
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.canDisplayBannerAds = true
+        self.adBannerView?.delegate = self
+        self.adBannerView?.hidden = true
+        
         self.MapView.hidden = true
         self.webView.hidden = false
         
         let detailH = detailHouse
         
-        let url =  NSURL(string: "\(detailH!.URL)")
-        let load = NSURLRequest(URL: url!)
         
-        webView.loadRequest(load)
+        if let url =  NSURL(string: detailH!.URL)
+ {
+            
+            let load = NSURLRequest(URL: url)
+            webView.loadRequest(load)
+        }
         
-
         
+        
+        configureView()
         mapAnnotation()
         
         
@@ -138,17 +147,50 @@ class DetailViewController: UIViewController,MKMapViewDelegate, CLLocationManage
         mapItem.openInMapsWithLaunchOptions(launchOptions)
         
     }
-
+    @IBAction func Directions(sender: AnyObject) {
+        
+        openMapForPlace()
+        
+    }
     
+    func openMapForPlace() {
+        
+        let lat1 : Double = detailHouse!.pinLatitude
+        let lng1 : Double = detailHouse!.pinLongitude
+        
+        let latitute:CLLocationDegrees =  lat1
+        let longitute:CLLocationDegrees =  lng1
+        
+        let regionDistance:CLLocationDistance = 10000
+        let coordinates = CLLocationCoordinate2DMake(latitute, longitute)
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+        let options = [
+            MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
+            MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span),
+            MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving
+        ]
+        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = "\(detailHouse!.name)"
+        mapItem.openInMapsWithLaunchOptions(options)
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
 
+        
+    }
 
-
-
-
-
-
-
-
+    func bannerViewWillLoadAd(banner: ADBannerView!) {
+        
+        NSLog("Ad Loaded")
+    }
+    
+    func bannerViewDidLoadAd(banner: ADBannerView!) {
+        self.adBannerView?.hidden = false
+    }
+    
+    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
+        self.adBannerView?.hidden = true
+    }
         // Do any additional setup after loading the view, typically from a nib.
     
     

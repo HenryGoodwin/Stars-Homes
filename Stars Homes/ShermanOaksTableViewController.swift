@@ -1,23 +1,31 @@
 //
-//  MasterViewController.swift
+//  ShermanOaksTableViewController.swift
 //  Stars Homes
 //
-//  Created by Henry Goodwin on 5/01/2016.
+//  Created by Henry Goodwin on 25/01/2016.
 //  Copyright © 2016 Henry Goodwin. All rights reserved.
 //
 
 import UIKit
 import iAd
 
-class MasterViewController: UITableViewController, ADBannerViewDelegate {
+class ShermanOaksTableViewController: UITableViewController, ADBannerViewDelegate {
     
     @IBOutlet var adBannerView: ADBannerView?
-    
+
     // MARK: - Properties
     var detailViewController: DetailViewController? = nil
     var House = [Home]()
     var filteredHouse = [Home]()
     let searchController = UISearchController(searchResultsController: nil)
+    
+    struct Objects {
+        var sectionName: String!
+        var sectionObjects: [String]!
+    }
+    
+    var objectsArray = [Objects]()
+    
     
     // MARK: - View Setup
     override func viewDidLoad() {
@@ -34,36 +42,16 @@ class MasterViewController: UITableViewController, ADBannerViewDelegate {
         searchController.dimsBackgroundDuringPresentation = false
         
         // Setup the Scope Bar
-        searchController.searchBar.scopeButtonTitles = ["All", "Film & TV", "Music", "Sport", "Icon", "Other"]
+        searchController.searchBar.scopeButtonTitles = ["All", "Film & TV", "Music", "Sport", "Other"]
         tableView.tableHeaderView = searchController.searchBar
-
+        
         
         House = [
-            //Beverly Hills
-            //Madonna
             
-            Home(category:"Other", name:"Christian Audigier", URL: "https://en.wikipedia.org/wiki/Christian_Audigier", pinLatitude: 34.063654 , pinLongitude : -118.329737, pinDetail : "600 S Muirfield Rd, Beverly Hills", pinTitle: "Christian Audigier"),
+           Home(category:"Film & TV", name:"Kaley Cuoco", URL: "https://en.wikipedia.org/wiki/Kaley_Cuoco", pinLatitude: 34.148293 , pinLongitude : -118.454634, pinDetail : "14717 Sutton St, Sherman Oaks", pinTitle: "Kaley Cuoco"),
             
-            Home(category:"Film & TV", name:"Hank Azaria", URL: "https://en.wikipedia.org/wiki/Hank_Azaria", pinLatitude: 34.110087 , pinLongitude : -118.418868, pinDetail : "2120 N Beverly Dr, Beverly Hills", pinTitle: "Hank Azaria"),
-            
-             Home(category:"Film & TV", name:"Walt Disney", URL: "https://en.wikipedia.org/wiki/Walt_Disney", pinLatitude: 34.084795 , pinLongitude : -118.429003, pinDetail : "355 Carolwood Drive, Beverly Hills", pinTitle: "Walt Disney (1901 - 1966)"),
-            
-            Home(category:"Iconic", name:"Modern Family Cam & Mitch", URL: "https://en.wikipedia.org/wiki/Modern_Family", pinLatitude: 34.051841 , pinLongitude : -118.416272, pinDetail : "2211 Fox Hills Dr, Beverly Hills", pinTitle: "Modern Family Cam & Mitch"),
-            
-            Home(category:"Iconic", name:"Modern Family Phil & Claire", URL: "https://en.wikipedia.org/wiki/Modern_Family", pinLatitude: 34.036356 , pinLongitude : -118.410230, pinDetail : "10336 Dunleer Dr, Beverly Hills", pinTitle: "Modern Family Phil & Claire"),
-            
-            Home(category:"Music", name:"John Fogerty", URL: "https://en.wikipedia.org/wiki/John_Fogerty", pinLatitude: 34.119185 , pinLongitude : -118.426535, pinDetail : "9754 Oak Pass Rd, Beverly Hills", pinTitle: "John Fogerty"),
-            
-            Home(category:"Film & TV", name:"Harrison Ford", URL: "https://en.wikipedia.org/wiki/Harrison_Ford", pinLatitude: 34.096974 , pinLongitude : -118.420953, pinDetail : "1420 Braeridge Drive, Beverly Hills", pinTitle: "Harrison Ford"),
-            
-            Home(category:"Music", name:"Madonna", URL: "https://en.wikipedia.org/wiki/Madonna_(entertainer)", pinLatitude: 34.0872054 , pinLongitude : -118.3994811, pinDetail : "9425 Sunset Blvd, Beverly Hills", pinTitle: "Madonna"),
-            
-            Home(category:"Film & TV", name:"Eddie Murphy", URL: "https://en.wikipedia.org/wiki/Eddie_Murphy", pinLatitude: 34.0991198 , pinLongitude : -118.3969917, pinDetail : "1081 Wallace Ridge, Beverly Hills", pinTitle: "Eddie Murphy"),
-            
-            //Elvis Presley
-            Home(category:"Music", name:"Elvis Presley", URL: "https://en.wikipedia.org/wiki/Elvis_Presley", pinLatitude: 34.097919 , pinLongitude : -118.3969712, pinDetail : "Elvis lived here from November 1967 until sometime in 1970", pinTitle: "Elvis Presley (1935-1977)"),
+        Home(category:"Music", name:"Brian Malouf", URL: "https://en.wikipedia.org/wiki/Brian_Malouf", pinLatitude: 34.161440 , pinLongitude : -118.421838 , pinDetail : "13245 Addison St, Sherman Oaks", pinTitle: "Brian Malouf"),]
         
-        Home(category:"Other", name:"Markus Persson", URL: "https://en.wikipedia.org/wiki/Markus_Persson", pinLatitude: 34.097244, pinLongitude :  -118.394545 , pinDetail : "1181 N Hillcrest Rd, Beverly Hills", pinTitle: "Markus Persson"),]
         
         
         
@@ -119,7 +107,7 @@ class MasterViewController: UITableViewController, ADBannerViewDelegate {
     
     // MARK: - Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showDetail" {
+        if segue.identifier == "showDetailShermanOaks" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let house: Home
                 if searchController.active && searchController.searchBar.text != "" {
@@ -133,7 +121,8 @@ class MasterViewController: UITableViewController, ADBannerViewDelegate {
                 controller.navigationItem.leftItemsSupplementBackButton = true
                 delay(0.5, closure: { () -> () in
                     self.dismissViewControllerAnimated(true, completion: nil)
-                })            }
+                })
+            }
         }
     }
     
@@ -153,14 +142,14 @@ class MasterViewController: UITableViewController, ADBannerViewDelegate {
     
 }
 
-extension MasterViewController: UISearchBarDelegate {
+extension ShermanOaksTableViewController: UISearchBarDelegate {
     // MARK: - UISearchBar Delegate
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
 }
 
-extension MasterViewController: UISearchResultsUpdating {
+extension ShermanOaksTableViewController: UISearchResultsUpdating {
     // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         let searchBar = searchController.searchBar
