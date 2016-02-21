@@ -78,7 +78,13 @@ class HollywoodHillsTableViewController: UITableViewController, ADBannerViewDele
         
         Home(category:"Other", name:"Jack Osbourne", URL: "https://en.wikipedia.org/wiki/Jack_Osbourne", pinLatitude: 34.111421, pinLongitude : -118.294152 , pinDetail : "2220 N Berendo St, Los Feliz", pinTitle: "Jack Osbourne"),
         
-        Home(category:"Music", name:"Kelly Osbourne", URL: "https://en.wikipedia.org/wiki/Kelly_Osbourne", pinLatitude: 34.099357, pinLongitude : -118.369727 , pinDetail : "8281 Hollywood Blvd, Hollywood Hills", pinTitle: "Kelly Osbourne"),]
+        Home(category:"Music", name:"Kelly Osbourne", URL: "https://en.wikipedia.org/wiki/Kelly_Osbourne", pinLatitude: 34.099357, pinLongitude : -118.369727 , pinDetail : "8281 Hollywood Blvd, Hollywood Hills", pinTitle: "Kelly Osbourne"),
+        
+        Home(category:"Film & TV", name:"Mario Van Peebles", URL: "https://en.wikipedia.org/wiki/Mario_Van_Peebles", pinLatitude: 34.124877, pinLongitude : -118.351144 , pinDetail : "3094 Ellington Dr, Hollywood Hills", pinTitle: "Mario Van Peebles"),
+        
+        Home(category:"Film & TV", name:"Jeremy Renner", URL: "https://en.wikipedia.org/wiki/Jeremy_Renner", pinLatitude: 34.103100, pinLongitude :  -118.351675 , pinDetail : "7420 Franklin Ave, Hollywood Hills", pinTitle: "Jeremy Renner"),
+        
+        Home(category:"Film & TV", name:"Meryl Streep", URL: "https://en.wikipedia.org/wiki/Meryl_Streep", pinLatitude: 34.099142, pinLongitude :  -118.383923 , pinDetail : "1514 Rising Glen Rd, Hollywood Hills", pinTitle: "Meryl Streep"),]
         
         
         if let splitViewController = splitViewController {

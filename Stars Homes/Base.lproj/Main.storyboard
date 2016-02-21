@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="n6K-pL-Xut">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="n6K-pL-Xut">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -143,7 +143,7 @@
             </objects>
             <point key="canvasLocation" x="-1352" y="-278"/>
         </scene>
-        <!--Location Table View Controller-->
+        <!--Stars' Homes-->
         <scene sceneID="37g-J9-pm8">
             <objects>
                 <tableViewController clearsSelectionOnViewWillAppear="NO" id="1Db-jo-qBR" customClass="LocationTableViewController" customModule="Stars_Homes" customModuleProvider="target" sceneMemberID="viewController">
@@ -467,8 +467,12 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="kxQ-iZ-vQD">
-                        <nil key="title"/>
+                    <navigationItem key="navigationItem" title="Stars' Homes" id="kxQ-iZ-vQD">
+                        <barButtonItem key="rightBarButtonItem" title="Options" id="nTg-pr-pBe">
+                            <connections>
+                                <segue destination="a2T-JM-vZP" kind="show" id="X7V-12-zdZ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -556,7 +560,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Afe-0E-sJd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-646" y="109"/>
+            <point key="canvasLocation" x="-602" y="98"/>
         </scene>
         <!--Bel AIr-->
         <scene sceneID="s8Y-vh-t3R">
@@ -1370,21 +1374,166 @@
             </objects>
             <point key="canvasLocation" x="3450" y="119"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="eRw-Ax-GRQ">
+        <!--Options-->
+        <scene sceneID="QfD-kt-P5M">
             <objects>
-                <viewController id="psH-Cy-uo4" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="rCh-lQ-fsy">
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="a2T-JM-vZP" customClass="OptionsTableViewController" customModule="Stars_Homes" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Fbj-QO-BU3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2QF-Z5-wB5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <adBannerView key="tableFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="UUo-yP-0T7">
+                            <rect key="frame" x="0.0" y="174" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        </adBannerView>
+                        <sections>
+                            <tableViewSection id="JKS-Gh-zoy">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Dbj-Zn-dCp" style="IBUITableViewCellStyleDefault" id="poM-CO-iD9">
+                                        <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="poM-CO-iD9" id="in9-Lq-IfC">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Disclamer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dbj-Zn-dCp">
+                                                    <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="XdK-Pr-9e6" kind="show" id="NMa-OR-eJb"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="aE3-t9-oHg" style="IBUITableViewCellStyleDefault" id="fpf-aC-y4I">
+                                        <rect key="frame" x="0.0" y="108" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fpf-aC-y4I" id="cJh-Y1-Ien">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Remove Ads" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aE3-t9-oHg">
+                                                    <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="0nI-hn-Z59" kind="show" id="dzQ-ZI-GXD"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="a2T-JM-vZP" id="5gd-Hq-5pL"/>
+                            <outlet property="delegate" destination="a2T-JM-vZP" id="m0p-IA-0Ci"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Options" id="oSR-tb-1cE"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="adBannerView" destination="UUo-yP-0T7" id="8UU-7h-0n2"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ukj-MN-sZi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="10" y="-1683"/>
+        </scene>
+        <!--Detail-->
+        <scene sceneID="cOf-Yf-bDv">
+            <objects>
+                <viewController title="Detail" id="XdK-Pr-9e6" customClass="DisclamerViewController" customModule="Stars_Homes" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="A6M-za-bdx"/>
+                        <viewControllerLayoutGuide type="bottom" id="3WE-Ve-yNl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LOs-2l-yC5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ksk-hy-BvG">
+                                <rect key="frame" x="60" y="534" width="480" height="66"/>
+                                <connections>
+                                    <outlet property="delegate" destination="XdK-Pr-9e6" id="OD8-gE-TSP"/>
+                                </connections>
+                            </adBannerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxY-Ca-Mlq">
+                                <rect key="frame" x="20" y="221" width="560" height="157"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="157" id="4ps-fy-hsS"/>
+                                </constraints>
+                                <string key="text">Feel Free Too Drive Around And Look At The Homes, But Remeber These Are Private Homes, Do Not Destrurb The Residences, Do Not Trespass Onto Private Property, Do Not Attempt To Enter The Homes</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ksk-hy-BvG" secondAttribute="trailing" constant="40" id="2Jc-nP-NCs"/>
+                            <constraint firstItem="Ksk-hy-BvG" firstAttribute="leading" secondItem="LOs-2l-yC5" secondAttribute="leadingMargin" constant="40" id="FVI-gR-0lb"/>
+                            <constraint firstItem="nxY-Ca-Mlq" firstAttribute="leading" secondItem="LOs-2l-yC5" secondAttribute="leadingMargin" id="Whf-xQ-dmZ"/>
+                            <constraint firstItem="nxY-Ca-Mlq" firstAttribute="centerY" secondItem="LOs-2l-yC5" secondAttribute="centerY" id="iyv-bf-Bpy"/>
+                            <constraint firstItem="nxY-Ca-Mlq" firstAttribute="centerX" secondItem="Ksk-hy-BvG" secondAttribute="centerX" id="oRB-1t-RSz"/>
+                            <constraint firstItem="3WE-Ve-yNl" firstAttribute="top" secondItem="Ksk-hy-BvG" secondAttribute="bottom" constant="-44" id="sZf-OB-B7R"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Disclamer" id="ZVU-uL-JOL"/>
+                    <connections>
+                        <outlet property="adBannerView" destination="Ksk-hy-BvG" id="faV-Al-WVE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RPB-mG-Ec4" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="842" y="-1977"/>
+        </scene>
+        <!--Detail-->
+        <scene sceneID="4eO-Ch-6Bb">
+            <objects>
+                <viewController title="Detail" id="0nI-hn-Z59" customClass="RemoveAdViewController" customModule="Stars_Homes" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hA2-wA-USD"/>
+                        <viewControllerLayoutGuide type="bottom" id="03T-UQ-cVN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hOX-0L-DMH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="QHW-Sa-Fdk">
+                                <rect key="frame" x="60" y="534" width="480" height="66"/>
+                                <connections>
+                                    <outlet property="delegate" destination="0nI-hn-Z59" id="WYW-J4-r8g"/>
+                                </connections>
+                            </adBannerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="03T-UQ-cVN" firstAttribute="top" secondItem="QHW-Sa-Fdk" secondAttribute="bottom" constant="-44" id="EMh-uo-C6j"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QHW-Sa-Fdk" secondAttribute="trailing" constant="40" id="ZGu-j3-vbv"/>
+                            <constraint firstItem="QHW-Sa-Fdk" firstAttribute="leading" secondItem="hOX-0L-DMH" secondAttribute="leadingMargin" constant="40" id="ziM-pB-GCm"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Remove Ads" id="izF-uH-66F"/>
+                    <connections>
+                        <outlet property="adBannerView" destination="QHW-Sa-Fdk" id="9H0-7H-L0b"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T1m-HR-ebH" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1480" y="-1977"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="n0f-BL-5D7"/>
+        <segue reference="ZCV-F9-762"/>
     </inferredMetricsTieBreakers>
 </document>

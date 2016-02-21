@@ -49,6 +49,7 @@ class DetailViewController: UIViewController,MKMapViewDelegate, CLLocationManage
          let detailH = detailHouse
         
         // Coordinates
+        
         let annotationLat:CLLocationDegrees = detailH!.pinLatitude
         let annotationLong:CLLocationDegrees = detailH!.pinLongitude
         
@@ -115,21 +116,35 @@ class DetailViewController: UIViewController,MKMapViewDelegate, CLLocationManage
         self.MapView.hidden = true
         self.webView.hidden = false
         
-        let detailH = detailHouse
+        var detailH = detailHouse
         
-        
-        if let url =  NSURL(string: detailH!.URL)
- {
+        if detailH?.URL == nil {
             
-            let load = NSURLRequest(URL: url)
-            webView.loadRequest(load)
+            detailH?.URL = "www.google.com"
+            
+        } else {
+        
+            
+        if let url =  NSURL(string: detailH!.URL){
+                
+                let load = NSURLRequest(URL: url)
+                webView.loadRequest(load)
+            }
+            
         }
+
+        if detailH?.pinLongitude == nil {
         
+            detailH?.pinLongitude = 0
+            detailH?.pinLatitude = 0
+
         
-        
-        configureView()
-        mapAnnotation()
-        
+        } else {
+            
+            configureView()
+            mapAnnotation()
+            
+        }
         
     }
     

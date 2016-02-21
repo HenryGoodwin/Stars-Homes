@@ -49,14 +49,17 @@ class MalibuTableViewController: UITableViewController, ADBannerViewDelegate {
         House = [
             //Malibu
             //Bob Dylan
-            Home(category:"Music", name:"Bob Dylan", URL: "https://en.wikipedia.org/wiki/Bob_Dylan", pinLatitude: 34.009805, pinLongitude : -118.811177, pinDetail : "29400 Bluewater Road, Malibu", pinTitle: "Bob Dylan"),
+        Home(category:"Music", name:"Bob Dylan", URL: "https://en.wikipedia.org/wiki/Bob_Dylan", pinLatitude: 34.009805, pinLongitude : -118.811177, pinDetail : "29400 Bluewater Road, Malibu", pinTitle: "Bob Dylan"),
             
-            Home(category:"Film & TV", name:"Tom Hanks", URL: "https://en.wikipedia.org/wiki/Tom_Hanks", pinLatitude: 34.031287 ,
-                pinLongitude : -118.684904, pinDetail : "23414 Malibu Colony Dr, Malibu", pinTitle: "Tom Hanks"),
+        Home(category:"Film & TV", name:"Tom Hanks", URL: "https://en.wikipedia.org/wiki/Tom_Hanks", pinLatitude: 34.031287 , pinLongitude : -118.684904, pinDetail : "23414 Malibu Colony Dr, Malibu", pinTitle: "Tom Hanks"),
             
         Home(category:"Music", name:"Chris Martin", URL: "https://en.wikipedia.org/wiki/Chris_Martin", pinLatitude: 34.011088 , pinLongitude : -118.795864 , pinDetail : "28815 Grayfox St, Malibu", pinTitle: "Chris Martin"),
         
-        Home(category:"Film & TV", name:"Nick Nolte", URL: "https://en.wikipedia.org/wiki/Nick_Nolte", pinLatitude: 34.022249, pinLongitude : -118.814860 , pinDetail : "6173 Bonsall Dr, Malibu", pinTitle: "Nick Nolte"),]
+        Home(category:"Film & TV", name:"Nick Nolte", URL: "https://en.wikipedia.org/wiki/Nick_Nolte", pinLatitude: 34.022249, pinLongitude : -118.814860 , pinDetail : "6173 Bonsall Dr, Malibu", pinTitle: "Nick Nolte"),
+        
+        Home(category:"Film & TV", name:"Gwyneth Paltrow", URL: "https://en.wikipedia.org/wiki/Gwyneth_Paltrow", pinLatitude: 34.011087 , pinLongitude :-118.795838, pinDetail : "28815 Grayfox St, Malibu", pinTitle: "Gwyneth Paltrow"),
+        
+        Home(category:"Film & TV", name:"Matthew Perry", URL: "https://en.wikipedia.org/wiki/Matthew_Perry", pinLatitude: 34.038513, pinLongitude : -118.676996 , pinDetail : "3556 Sweetwater Mesa Rd, Malibu", pinTitle: "Matthew Perry"),]
         
         
         

@@ -14,6 +14,10 @@
 		22853F161C57039A00D40254 /* PalmSpringsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22853F151C57039A00D40254 /* PalmSpringsTableViewController.swift */; };
 		22853F1A1C5763F500D40254 /* BrentwoodTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22853F191C5763F500D40254 /* BrentwoodTableViewController.swift */; };
 		22853F1C1C579A3700D40254 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22853F1B1C579A3700D40254 /* iAd.framework */; };
+		22A5DF9D1C7835C400992EC0 /* OptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A5DF9C1C7835C400992EC0 /* OptionsTableViewController.swift */; };
+		22A5DF9F1C78417100992EC0 /* DisclamerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A5DF9E1C78417100992EC0 /* DisclamerViewController.swift */; };
+		22A5DFA11C7845F000992EC0 /* RemoveAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A5DFA01C7845F000992EC0 /* RemoveAdViewController.swift */; };
+		22A5DFA31C7952B600992EC0 /* GlendaleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A5DFA21C7952B600992EC0 /* GlendaleTableViewController.swift */; };
 		22A67C7D1C6857900059EA72 /* LocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A67C7C1C6857900059EA72 /* LocationTableViewController.swift */; };
 		22C1D4AC1C49F416008FA684 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C1D4AB1C49F416008FA684 /* MapKit.framework */; };
 		22D234EB1C3C83CA00AAB343 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D234EA1C3C83CA00AAB343 /* AppDelegate.swift */; };
@@ -60,6 +64,10 @@
 		22853F151C57039A00D40254 /* PalmSpringsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PalmSpringsTableViewController.swift; sourceTree = "<group>"; };
 		22853F191C5763F500D40254 /* BrentwoodTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrentwoodTableViewController.swift; sourceTree = "<group>"; };
 		22853F1B1C579A3700D40254 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		22A5DF9C1C7835C400992EC0 /* OptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsTableViewController.swift; sourceTree = "<group>"; };
+		22A5DF9E1C78417100992EC0 /* DisclamerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisclamerViewController.swift; sourceTree = "<group>"; };
+		22A5DFA01C7845F000992EC0 /* RemoveAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveAdViewController.swift; sourceTree = "<group>"; };
+		22A5DFA21C7952B600992EC0 /* GlendaleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlendaleTableViewController.swift; sourceTree = "<group>"; };
 		22A67C7C1C6857900059EA72 /* LocationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableViewController.swift; sourceTree = "<group>"; };
 		22C1D4AB1C49F416008FA684 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		22D234E71C3C83CA00AAB343 /* Stars Homes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stars Homes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +150,9 @@
 				22D234EA1C3C83CA00AAB343 /* AppDelegate.swift */,
 				22D2351A1C3C84B200AAB343 /* DetailViewController.swift */,
 				22A67C7C1C6857900059EA72 /* LocationTableViewController.swift */,
+				22A5DF9C1C7835C400992EC0 /* OptionsTableViewController.swift */,
+				22A5DF9E1C78417100992EC0 /* DisclamerViewController.swift */,
+				22A5DFA01C7845F000992EC0 /* RemoveAdViewController.swift */,
 				22FDBA261C55050D00340A25 /* Suburbs */,
 				22D234EE1C3C83CA00AAB343 /* Main.storyboard */,
 				227422D41C48BCF600899282 /* House.swift */,
@@ -175,6 +186,7 @@
 			children = (
 				22FDBA271C55053800340A25 /* LosOlivosTableViewController.swift */,
 				22FDBA2B1C55174200340A25 /* AllSubTableViewController.swift */,
+				22A5DFA21C7952B600992EC0 /* GlendaleTableViewController.swift */,
 				226FE3361C5E26DC00EF318D /* HiddenHillsTableViewController.swift */,
 				226FE3341C5E17F400EF318D /* PacificPalisadesTableViewController.swift */,
 				22FDBA351C55DC4E00340A25 /* WoodlandHillsTableViewController.swift */,
@@ -329,6 +341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22A5DF9D1C7835C400992EC0 /* OptionsTableViewController.swift in Sources */,
 				22FDBA281C55053800340A25 /* LosOlivosTableViewController.swift in Sources */,
 				22D2351B1C3C84B200AAB343 /* DetailViewController.swift in Sources */,
 				22FDBA361C55DC4E00340A25 /* WoodlandHillsTableViewController.swift in Sources */,
@@ -345,9 +358,12 @@
 				22FDBA2A1C55055600340A25 /* EncinoTableViewController.swift in Sources */,
 				227422D51C48BCF600899282 /* House.swift in Sources */,
 				22FDBA301C55C97D00340A25 /* CalabasasTableViewController.swift in Sources */,
+				22A5DFA31C7952B600992EC0 /* GlendaleTableViewController.swift in Sources */,
+				22A5DF9F1C78417100992EC0 /* DisclamerViewController.swift in Sources */,
 				22D235191C3C846F00AAB343 /* MasterViewController.swift in Sources */,
 				22FDBA341C55CADC00340A25 /* StudioCityTableViewController.swift in Sources */,
 				226FE3351C5E17F400EF318D /* PacificPalisadesTableViewController.swift in Sources */,
+				22A5DFA11C7845F000992EC0 /* RemoveAdViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,7 +508,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Henry-Goodwin.Stars-Homes";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -505,7 +521,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Henry-Goodwin.Stars-Homes";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

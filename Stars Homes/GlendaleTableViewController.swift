@@ -1,18 +1,18 @@
 //
-//  StudioCityTableViewController.swift
+//  GlendaleTableViewController.swift
 //  Stars Homes
 //
-//  Created by Henry Goodwin on 25/01/2016.
+//  Created by Henry Goodwin on 21/02/2016.
 //  Copyright © 2016 Henry Goodwin. All rights reserved.
 //
 
 import UIKit
 import iAd
 
-class StudioCityTableViewController: UITableViewController, ADBannerViewDelegate {
+class GlendaleTableViewController: UITableViewController, ADBannerViewDelegate {
     
     @IBOutlet var adBannerView: ADBannerView?
-
+    
     // MARK: - Properties
     var detailViewController: DetailViewController? = nil
     var House = [Home]()
@@ -42,19 +42,16 @@ class StudioCityTableViewController: UITableViewController, ADBannerViewDelegate
         searchController.dimsBackgroundDuringPresentation = false
         
         // Setup the Scope Bar
-        searchController.searchBar.scopeButtonTitles = ["All", "Film & TV", "Music", "Sport", "Other"]
+        searchController.searchBar.scopeButtonTitles = ["All", "Film & TV", "Music", "Sport", "Iconic" ,"Other"]
         tableView.tableHeaderView = searchController.searchBar
         
         
         House = [
             
-           Home(category:"Film & TV", name:"Taye Diggs", URL: "https://en.wikipedia.org/wiki/Taye_Diggs", pinLatitude: 34.126091 , pinLongitude : -118.390604, pinDetail : "3121 Oakdell Ln, Studio City", pinTitle: "Taye Diggs"),
+            Home(category:"Other", name:"Nicole Richie", URL: "https://en.wikipedia.org/wiki/Nicole_Richie", pinLatitude: 34.170553 , pinLongitude : -118.268032, pinDetail : "1516 Hillcrest Ave, Glendale", pinTitle: "Nicole Richie"),
             
-        Home(category:"Film & TV", name:"Idina Menzel", URL: "https://en.wikipedia.org/wiki/Idina_Menzel", pinLatitude: 34.126088 , pinLongitude : -118.390601, pinDetail : "3121 Oakdell Ln, Studio City", pinTitle: "Idina Menzel"),
-            
-        Home(category:"Film & TV", name:"Ellen Page", URL: "https://en.wikipedia.org/wiki/Ellen_Page", pinLatitude: 34.133971, pinLongitude : -118.379282 , pinDetail : "11283 Canton Dr, Studio City", pinTitle: "Ellen Page")]
-            
-
+            Home(category:"", name:"", URL: "", pinLatitude: 0 , pinLongitude : 0 , pinDetail : "", pinTitle: ""),]
+        
         
         
         
@@ -110,7 +107,7 @@ class StudioCityTableViewController: UITableViewController, ADBannerViewDelegate
     
     // MARK: - Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showDetailStudioCity" {
+        if segue.identifier == "showDetailGlendale" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let house: Home
                 if searchController.active && searchController.searchBar.text != "" {
@@ -141,18 +138,18 @@ class StudioCityTableViewController: UITableViewController, ADBannerViewDelegate
     func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
         self.adBannerView?.hidden = true
     }
-
+    
     
 }
 
-extension StudioCityTableViewController: UISearchBarDelegate {
+extension GlendaleTableViewController: UISearchBarDelegate {
     // MARK: - UISearchBar Delegate
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
 }
 
-extension StudioCityTableViewController: UISearchResultsUpdating {
+extension GlendaleTableViewController: UISearchResultsUpdating {
     // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         let searchBar = searchController.searchBar

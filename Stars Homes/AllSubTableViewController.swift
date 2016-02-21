@@ -158,8 +158,30 @@ class AllSubTableViewController: UITableViewController, ADBannerViewDelegate {
         Home(category:"Other", name:"Jack Osbourne", URL: "https://en.wikipedia.org/wiki/Jack_Osbourne", pinLatitude: 34.111421, pinLongitude : -118.294152 , pinDetail : "2220 N Berendo St, Los Feliz", pinTitle: "Jack Osbourne"),
         
         Home(category:"Music", name:"Kelly Osbourne", URL: "https://en.wikipedia.org/wiki/Kelly_Osbourne", pinLatitude: 34.099357, pinLongitude : -118.369727 , pinDetail : "8281 Hollywood Blvd, Hollywood Hills", pinTitle: "Kelly Osbourne"),
+            
+        Home(category:"Film & TV", name:"Ellen Page", URL: "https://en.wikipedia.org/wiki/Ellen_Page", pinLatitude: 34.133971, pinLongitude : -118.379282 , pinDetail : "11283 Canton Dr, Studio City", pinTitle: "Ellen Page"),
+            
+        Home(category:"Film & TV", name:"Gwyneth Paltrow", URL: "https://en.wikipedia.org/wiki/Gwyneth_Paltrow", pinLatitude: 34.011087 , pinLongitude :-118.795838, pinDetail : "28815 Grayfox St, Malibu", pinTitle: "Gwyneth Paltrow"),
+            
+        Home(category:"Film & TV", name:"Mario Van Peebles", URL: "https://en.wikipedia.org/wiki/Mario_Van_Peebles", pinLatitude: 34.124877, pinLongitude : -118.351144 , pinDetail : "3094 Ellington Dr, Hollywood Hills", pinTitle: "Mario Van Peebles"),
         
         Home(category:"Other", name:"Markus Persson", URL: "https://en.wikipedia.org/wiki/Markus_Persson", pinLatitude: 34.097244, pinLongitude :  -118.394545 , pinDetail : "1181 N Hillcrest Rd, Beverly Hills", pinTitle: "Markus Persson"),
+        
+        Home(category:"Film & TV", name:"Matthew Perry", URL: "https://en.wikipedia.org/wiki/Matthew_Perry", pinLatitude: 34.038513, pinLongitude : -118.676996 , pinDetail : "3556 Sweetwater Mesa Rd, Malibu", pinTitle: "Matthew Perry"),
+        
+        Home(category:"Music", name:"Pink", URL: "https://en.wikipedia.org/wiki/Pink_(singer)", pinLatitude: 34.147459, pinLongitude : -118.455430 , pinDetail : "14734 Sutton St, Sherman Oaks", pinTitle: "Pink"),
+        
+        Home(category:"Iconic", name:"Fresh Prince of Bel Air Mansion", URL: "https://en.wikipedia.org/wiki/The_Fresh_Prince_of_Bel-Air", pinLatitude: 34.086673, pinLongitude : -118.436948 , pinDetail : "616 Nimes Rd, Bel Air", pinTitle: "Fresh Prince of Bel Air Mansion"),
+        
+        Home(category:"Film & TV", name:"Jeremy Renner", URL: "https://en.wikipedia.org/wiki/Jeremy_Renner", pinLatitude: 34.103100, pinLongitude :  -118.351675 , pinDetail : "7420 Franklin Ave, Hollywood Hills", pinTitle: "Jeremy Renner"),
+        
+        Home(category:"Sport", name:"Pete Sampras", URL: "https://en.wikipedia.org/wiki/Pete_Sampras", pinLatitude: 34.128548, pinLongitude :  -118.465969 , pinDetail : "3051 Antelo View Dr, Bel Air", pinTitle: "Pete Sampras"),
+        
+        Home(category:"Film & TV", name:"Meryl Streep", URL: "https://en.wikipedia.org/wiki/Meryl_Streep", pinLatitude: 34.099142, pinLongitude :  -118.383923 , pinDetail : "1514 Rising Glen Rd, Hollywood Hills", pinTitle: "Meryl Streep"),
+        
+        Home(category:"Music", name:"Harry Styles", URL: "https://en.wikipedia.org/wiki/Harry_Styles", pinLatitude: 34.116593, pinLongitude : -118.426097 , pinDetail : "9551 Oak Pass Rd, Beverly Hills", pinTitle: "Harry Styles"),
+        
+        Home(category:"", name:"", URL: "", pinLatitude: 0, pinLongitude : 0 , pinDetail : "", pinTitle: ""),
         
         Home(category:"", name:"", URL: "", pinLatitude: 0, pinLongitude : 0 , pinDetail : "", pinTitle: ""),
         

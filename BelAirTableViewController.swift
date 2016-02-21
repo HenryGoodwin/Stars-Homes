@@ -47,19 +47,23 @@ class BelAirTableViewController: UITableViewController, ADBannerViewDelegate {
         
         House = [
             
-            Home(category:"Film & TV", name:"Nicolas Cage", URL: "https://en.wikipedia.org/wiki/Nicolas_Cage", pinLatitude : 34.0824042, pinLongitude : -118.4407743, pinDetail : "363 Copa De Oro Road, Bel Air", pinTitle: "Nicholas Cage"),
+        Home(category:"Film & TV", name:"Nicolas Cage", URL: "https://en.wikipedia.org/wiki/Nicolas_Cage", pinLatitude : 34.0824042, pinLongitude : -118.4407743, pinDetail : "363 Copa De Oro Road, Bel Air", pinTitle: "Nicholas Cage"),
             
-            Home(category:"Film & TV", name:"Nick Cannon", URL: "https://en.wikipedia.org/wiki/Nick_Cannon", pinLatitude: 34.129341 , pinLongitude : -118.463620, pinDetail : "3130 Antelo Rd, Bel Air", pinTitle: "Nick Cannon"),
-            
-            
-            Home(category:"Music", name:"Mariah Carey", URL: "https://en.wikipedia.org/wiki/Mariah_Carey", pinLatitude: 34.129341 , pinLongitude : -118.463620, pinDetail : "3130 Antelo Rd, Bel Air", pinTitle: "Mariah Carey"),
+        Home(category:"Film & TV", name:"Nick Cannon", URL: "https://en.wikipedia.org/wiki/Nick_Cannon", pinLatitude: 34.129341 , pinLongitude : -118.463620, pinDetail : "3130 Antelo Rd, Bel Air", pinTitle: "Nick Cannon"),
             
             
-             Home(category:"Film & TV", name:"Clint Eastwood", URL: "https://en.wikipedia.org/wiki/Clint_Eastwood", pinLatitude :34.084666, pinLongitude : -118.452541, pinDetail : "846 Stradella Road, Bel Air", pinTitle: "Clint Eastwood"),
+        Home(category:"Music", name:"Mariah Carey", URL: "https://en.wikipedia.org/wiki/Mariah_Carey", pinLatitude: 34.129341 , pinLongitude : -118.463620, pinDetail : "3130 Antelo Rd, Bel Air", pinTitle: "Mariah Carey"),
             
-            Home(category:"Music", name:"Michael Jackson", URL: "https://en.wikipedia.org/wiki/Michael_Jackson", pinLatitude : 34.080663, pinLongitude : -118.426146, pinDetail : "100 N. Carolwood Drive, Bel Air, Michael Jackson's Last Home", pinTitle: "Michael Jackson (1958-2009)"),
+            
+        Home(category:"Film & TV", name:"Clint Eastwood", URL: "https://en.wikipedia.org/wiki/Clint_Eastwood", pinLatitude :34.084666, pinLongitude : -118.452541, pinDetail : "846 Stradella Road, Bel Air", pinTitle: "Clint Eastwood"),
+            
+        Home(category:"Music", name:"Michael Jackson", URL: "https://en.wikipedia.org/wiki/Michael_Jackson", pinLatitude : 34.080663, pinLongitude : -118.426146, pinDetail : "100 N. Carolwood Drive, Bel Air, Michael Jackson's Last Home", pinTitle: "Michael Jackson (1958-2009)"),
         
-        Home(category:"Film & TV", name:"Mike Medavoy", URL: "https://en.wikipedia.org/wiki/Mike_Medavoy", pinLatitude: 34.082750 , pinLongitude :  -118.445913 , pinDetail : "638 Siena Way, Bel Air", pinTitle: "Mike Medavoy"),]
+        Home(category:"Film & TV", name:"Mike Medavoy", URL: "https://en.wikipedia.org/wiki/Mike_Medavoy", pinLatitude: 34.082750 , pinLongitude :  -118.445913 , pinDetail : "638 Siena Way, Bel Air", pinTitle: "Mike Medavoy"),
+        
+        Home(category:"Iconic", name:"Fresh Prince of Bel Air Mansion", URL: "https://en.wikipedia.org/wiki/The_Fresh_Prince_of_Bel-Air", pinLatitude: 34.086673, pinLongitude : -118.436948 , pinDetail : "616 Nimes Rd, Bel Air", pinTitle: "Fresh Prince of Bel Air Mansion"),
+        
+        Home(category:"Sport", name:"Pete Sampras", URL: "https://en.wikipedia.org/wiki/Pete_Sampras", pinLatitude: 34.128548, pinLongitude :  -118.465969 , pinDetail : "3051 Antelo View Dr, Bel Air", pinTitle: "Pete Sampras"),]
         
         
         

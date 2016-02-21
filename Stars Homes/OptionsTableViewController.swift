@@ -1,15 +1,15 @@
 //
-//  LocationTableViewController.swift
+//  OptionsTableViewController.swift
 //  Stars Homes
 //
-//  Created by Henry Goodwin on 8/02/2016.
+//  Created by Henry Goodwin on 20/02/2016.
 //  Copyright © 2016 Henry Goodwin. All rights reserved.
 //
 
 import UIKit
 import iAd
 
-class LocationTableViewController: UITableViewController, ADBannerViewDelegate {
+class OptionsTableViewController: UITableViewController, ADBannerViewDelegate {
     
     @IBOutlet var adBannerView: ADBannerView?
 
@@ -41,4 +41,7 @@ class LocationTableViewController: UITableViewController, ADBannerViewDelegate {
     }
 
 
+    // MARK: - Table view data source
+
+    
 }

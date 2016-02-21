@@ -50,7 +50,9 @@ class ShermanOaksTableViewController: UITableViewController, ADBannerViewDelegat
             
            Home(category:"Film & TV", name:"Kaley Cuoco", URL: "https://en.wikipedia.org/wiki/Kaley_Cuoco", pinLatitude: 34.148293 , pinLongitude : -118.454634, pinDetail : "14717 Sutton St, Sherman Oaks", pinTitle: "Kaley Cuoco"),
             
-        Home(category:"Music", name:"Brian Malouf", URL: "https://en.wikipedia.org/wiki/Brian_Malouf", pinLatitude: 34.161440 , pinLongitude : -118.421838 , pinDetail : "13245 Addison St, Sherman Oaks", pinTitle: "Brian Malouf"),]
+        Home(category:"Music", name:"Brian Malouf", URL: "https://en.wikipedia.org/wiki/Brian_Malouf", pinLatitude: 34.161440 , pinLongitude : -118.421838 , pinDetail : "13245 Addison St, Sherman Oaks", pinTitle: "Brian Malouf"),
+        
+        Home(category:"Music", name:"Pink", URL: "https://en.wikipedia.org/wiki/Pink_(singer)", pinLatitude: 34.147459, pinLongitude : -118.455430 , pinDetail : "14734 Sutton St, Sherman Oaks", pinTitle: "Pink"),]
         
         
         

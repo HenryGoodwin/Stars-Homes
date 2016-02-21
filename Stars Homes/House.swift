@@ -9,13 +9,13 @@
 import Foundation
 
 struct Home{
-    let category : String
-    let name : String
-    let URL : String
-    let pinLatitude : Double
-    let pinLongitude : Double
-    let pinDetail : String
-    let pinTitle : String
+    var category : String
+    var name : String
+    var URL : String
+    var pinLatitude : Double
+    var pinLongitude : Double
+    var pinDetail : String
+    var pinTitle : String
 
     
 }
