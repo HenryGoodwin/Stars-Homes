@@ -12,7 +12,6 @@ import iAd
 class CalabasasTableViewController: UITableViewController, ADBannerViewDelegate {
     
     @IBOutlet var adBannerView: ADBannerView?
-
     
     // MARK: - Properties
     var detailViewController: DetailViewController? = nil
@@ -41,9 +40,10 @@ class CalabasasTableViewController: UITableViewController, ADBannerViewDelegate 
         searchController.searchBar.delegate = self
         definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search For A Star"
         
         // Setup the Scope Bar
-        searchController.searchBar.scopeButtonTitles = ["All", "Film & TV", "Music", "Sport", "Other"]
+        searchController.searchBar.scopeButtonTitles = ["All", "Film & TV", "Music"]
         tableView.tableHeaderView = searchController.searchBar
         
         
@@ -51,19 +51,21 @@ class CalabasasTableViewController: UITableViewController, ADBannerViewDelegate 
             
             Home(category:"Music", name:"Toni Braxton", URL: "https://en.wikipedia.org/wiki/Toni_Braxton", pinLatitude: 34.132097 , pinLongitude : -118.669100, pinDetail : "25281 Prado Del Grandioso, Calabasas", pinTitle: "Toni Braxton"),
             
-        Home(category:"Film & TV", name:"Khloe Kardashian",URL: "https://en.wikipedia.org/wiki/Khlo%C3%A9_Kardashian", pinLatitude: 34.128589 , pinLongitude : -118.671428, pinDetail : "25202 Prado Del Grandioso, Calabasas", pinTitle: "Khloe Kardashian"),]
+        Home(category:"Film & TV", name:"Khloe Kardashian",URL: "https://en.wikipedia.org/wiki/Khlo%C3%A9_Kardashian", pinLatitude: 34.128589 , pinLongitude : -118.671428, pinDetail : "25202 Prado Del Grandioso, Calabasas", pinTitle: "Khloe Kardashian"),
+        
+        Home(category:"Film & TV", name:"Kourtney Kardashian", URL: "https://en.wikipedia.org/wiki/Kourtney_Kardashian", pinLatitude: 34.127899, pinLongitude : -118.676961 , pinDetail : "25344 Prado De La Felicidad, Calabasas", pinTitle: "Kourtney Kardashian"),]
     
-        
-        
-        
-        if let splitViewController = splitViewController {
-            let controllers = splitViewController.viewControllers
-            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+    }
+    
+    deinit{
+        if let superView = searchController.view.superview
+        {
+            superView.removeFromSuperview()
         }
     }
     
     override func viewWillAppear(animated: Bool) {
-        clearsSelectionOnViewWillAppear = splitViewController!.collapsed
+        
         super.viewWillAppear(animated)
     }
     
@@ -77,7 +79,7 @@ class CalabasasTableViewController: UITableViewController, ADBannerViewDelegate 
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.active && searchController.searchBar.text != "" {
+        if searchController.active && (searchController.searchBar.text != "" || !filteredHouse.isEmpty) {
             return filteredHouse.count
         }
         return House.count
@@ -88,7 +90,10 @@ class CalabasasTableViewController: UITableViewController, ADBannerViewDelegate 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         let house: Home
-        if searchController.active && searchController.searchBar.text != "" {
+        
+        
+        if searchController.active && (searchController.searchBar.text != "" || !filteredHouse.isEmpty) {
+            
             house = filteredHouse[indexPath.row]
         } else {
             house = House[indexPath.row]
@@ -99,34 +104,47 @@ class CalabasasTableViewController: UITableViewController, ADBannerViewDelegate 
     }
     
     func filterContentForSearchText(searchText: String, scope: String = "All") {
-        filteredHouse = House.filter({( candy : Home) -> Bool in
-            let categoryMatch = (scope == "All") || (candy.category == scope)
-            return categoryMatch && candy.name.lowercaseString.containsString(searchText.lowercaseString)
+        
+        filteredHouse = House.filter({ house -> Bool in
+            let categoryMatch = (scope == "All") || (house.category == scope)
+            if searchText.isEmpty {
+                return categoryMatch
+            } else {
+                return categoryMatch && house.name.lowercaseString.containsString(searchText.lowercaseString)
+            }
         })
         tableView.reloadData()
     }
     
+    // showDetailCalabasas
     // MARK: - Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetailCalabasas" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let house: Home
-                if searchController.active && searchController.searchBar.text != "" {
+                if searchController.active && (searchController.searchBar.text != "" || !filteredHouse.isEmpty) {
                     house = filteredHouse[indexPath.row]
                 } else {
                     house = House[indexPath.row]
                 }
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+                
+                let tabBar = segue.destinationViewController as? TBViewController
+                let controller = tabBar?.viewControllers![0] as! DetailViewController
+                let secondController = tabBar?.viewControllers![1] as! SecondDetailViewController
+                
                 controller.detailHouse = house
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
+                secondController.detailHouse = house
+                tabBar?.detailHouse = house
+                secondController.navigationItem.leftItemsSupplementBackButton = true
                 controller.navigationItem.leftItemsSupplementBackButton = true
+                
                 delay(0.5, closure: { () -> () in
                     self.dismissViewControllerAnimated(true, completion: nil)
                 })
+                
             }
         }
     }
-    
     func bannerViewWillLoadAd(banner: ADBannerView!) {
         
         NSLog("Ad Loaded")

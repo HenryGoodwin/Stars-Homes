@@ -1,18 +1,19 @@
 //
-//  StudioCityTableViewController.swift
+//  LosFelizTableViewController.swift
 //  Stars Homes
 //
-//  Created by Henry Goodwin on 25/01/2016.
+//  Created by Henry Goodwin on 26/02/2016.
 //  Copyright © 2016 Henry Goodwin. All rights reserved.
 //
 
 import UIKit
 import iAd
 
-class StudioCityTableViewController: UITableViewController, ADBannerViewDelegate {
+class LosFelizTableViewController: UITableViewController, ADBannerViewDelegate {
     
     @IBOutlet var adBannerView: ADBannerView?
 
+    
     // MARK: - Properties
     var detailViewController: DetailViewController? = nil
     var House = [Home]()
@@ -43,22 +44,25 @@ class StudioCityTableViewController: UITableViewController, ADBannerViewDelegate
         searchController.searchBar.placeholder = "Search For A Star"
         
         // Setup the Scope Bar
-        searchController.searchBar.scopeButtonTitles = ["All", "Film & TV"]
+        searchController.searchBar.scopeButtonTitles = ["All", "Film & TV","Other"]
         tableView.tableHeaderView = searchController.searchBar
         
         
         House = [
             
-           Home(category:"Film & TV", name:"Taye Diggs", URL: "https://en.wikipedia.org/wiki/Taye_Diggs", pinLatitude: 34.126091 , pinLongitude : -118.390604, pinDetail : "3121 Oakdell Ln, Studio City", pinTitle: "Taye Diggs"),
+            Home(category:"Film & TV", name:"Jesse Tyler Ferguson", URL: "https://en.wikipedia.org/wiki/Jesse_Tyler_Ferguson", pinLatitude: 34.117374, pinLongitude : -118.288129 , pinDetail : "2566 Aberdeen Ave, Los Feliz", pinTitle: "Jesse Tyler Ferguson"),
             
-            Home(category:"Film & TV", name:"Jenna Fischer", URL: "https://en.wikipedia.org/wiki/Jenna_Fischer", pinLatitude: 34.138209, pinLongitude :-118.410849, pinDetail : "3774 Alta Mesa Dr, Studio City", pinTitle: "Jenna Fischer"),
-            
-        Home(category:"Film & TV", name:"Idina Menzel", URL: "https://en.wikipedia.org/wiki/Idina_Menzel", pinLatitude: 34.126088 , pinLongitude : -118.390601, pinDetail : "3121 Oakdell Ln, Studio City", pinTitle: "Idina Menzel"),
-            
-        Home(category:"Film & TV", name:"Ellen Page", URL: "https://en.wikipedia.org/wiki/Ellen_Page", pinLatitude: 34.133971, pinLongitude : -118.379282 , pinDetail : "11283 Canton Dr, Studio City", pinTitle: "Ellen Page")]
-            
-
-    }
+             Home(category:"Film & TV", name:"Megan Fox", URL: "https://en.wikipedia.org/wiki/Megan_Fox", pinLatitude: 34.114836 , pinLongitude :  -118.296151, pinDetail : "2771 Glendower Ave, Los Feliz", pinTitle: "Brian Austin Green & Megan Fox’s House"),
+        
+            Home(category:"Film & TV", name:"Brian Austin Green", URL: "hhttps://en.wikipedia.org/wiki/Brian_Austin_Green", pinLatitude: 34.114836 , pinLongitude :  -118.296151, pinDetail : "2771 Glendower Ave, Los Feliz", pinTitle: "Brian Austin Green & Megan Fox’s House"),
+        
+            Home(category:"Other", name:"Jamie Kennedy", URL: "https://en.wikipedia.org/wiki/Jamie_Kennedy", pinLatitude: 34.115899, pinLongitude :  -118.289968 , pinDetail : "2508 N Vermont Ave, Los Feliz", pinTitle: "Jamie Kennedy"),
+        
+            Home(category:"Other", name:"Jack Osbourne", URL: "https://en.wikipedia.org/wiki/Jack_Osbourne", pinLatitude: 34.111421, pinLongitude : -118.294152 , pinDetail : "2220 N Berendo St, Los Feliz", pinTitle: "Jack Osbourne"),
+        
+            Home(category:"Film & TV", name:"Zoe Saldana", URL: "https://en.wikipedia.org/wiki/Zoe_Saldana", pinLatitude: 34.105964, pinLongitude : -118.278210 , pinDetail : "2320 St George St, Los Feliz", pinTitle: "Zoe Saldana"),]
+        
+        }
     
     deinit{
         if let superView = searchController.view.superview
@@ -119,10 +123,10 @@ class StudioCityTableViewController: UITableViewController, ADBannerViewDelegate
         tableView.reloadData()
     }
     
-    // showDetailStudioCity
+    // MARK: - Segues
     // MARK: - Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showDetailStudioCity" {
+        if segue.identifier == "showDetailLosFeliz" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let house: Home
                 if searchController.active && (searchController.searchBar.text != "" || !filteredHouse.isEmpty) {
@@ -130,6 +134,7 @@ class StudioCityTableViewController: UITableViewController, ADBannerViewDelegate
                 } else {
                     house = House[indexPath.row]
                 }
+                
                 let tabBar = segue.destinationViewController as? TBViewController
                 let controller = tabBar?.viewControllers![0] as! DetailViewController
                 let secondController = tabBar?.viewControllers![1] as! SecondDetailViewController
@@ -147,7 +152,6 @@ class StudioCityTableViewController: UITableViewController, ADBannerViewDelegate
             }
         }
     }
-    
     func bannerViewWillLoadAd(banner: ADBannerView!) {
         
         NSLog("Ad Loaded")
@@ -160,18 +164,18 @@ class StudioCityTableViewController: UITableViewController, ADBannerViewDelegate
     func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
         self.adBannerView?.hidden = true
     }
-
+    
     
 }
 
-extension StudioCityTableViewController: UISearchBarDelegate {
+extension LosFelizTableViewController: UISearchBarDelegate {
     // MARK: - UISearchBar Delegate
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
 }
 
-extension StudioCityTableViewController: UISearchResultsUpdating {
+extension LosFelizTableViewController: UISearchResultsUpdating {
     // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         let searchBar = searchController.searchBar

@@ -12,7 +12,6 @@ import iAd
 class PalmSpringsTableViewController: UITableViewController, ADBannerViewDelegate {
     
     @IBOutlet var adBannerView: ADBannerView?
-
     
     // MARK: - Properties
     var detailViewController: DetailViewController? = nil
@@ -41,27 +40,29 @@ class PalmSpringsTableViewController: UITableViewController, ADBannerViewDelegat
         searchController.searchBar.delegate = self
         definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search For A Star"
         
         // Setup the Scope Bar
-        searchController.searchBar.scopeButtonTitles = ["All", "Film & TV", "Music", "Sport", "Other"]
+        searchController.searchBar.scopeButtonTitles = ["All", "Film & TV", "Other"]
         tableView.tableHeaderView = searchController.searchBar
         
         
         House = [
             
-            Home(category:"Film & TV", name:"Leonardo DiCaprio", URL: "https://en.wikipedia.org/wiki/Leonardo_DiCaprio", pinLatitude: 33.835863 , pinLongitude : -116.551825, pinDetail : "432 Hermosa Pl, Palm Springs", pinTitle: "Leonardo DiCaprio")]
+            Home(category:"Film & TV", name:"Leonardo DiCaprio", URL: "https://en.wikipedia.org/wiki/Leonardo_DiCaprio", pinLatitude: 33.835863 , pinLongitude : -116.551825, pinDetail : "432 Hermosa Pl, Palm Springs", pinTitle: "Leonardo DiCaprio"),
         
-        
-        
-        
-        if let splitViewController = splitViewController {
-            let controllers = splitViewController.viewControllers
-            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+            Home(category:"Other", name:"Bob Hope", URL: "https://en.wikipedia.org/wiki/Bob_Hope", pinLatitude: 33.787345, pinLongitude :  -116.511544 , pinDetail : "2466 Southridge Dr, Palm Springs", pinTitle: "Bob Hope (1903-2003)"),]
+    }
+    
+    deinit{
+        if let superView = searchController.view.superview
+        {
+            superView.removeFromSuperview()
         }
     }
     
     override func viewWillAppear(animated: Bool) {
-        clearsSelectionOnViewWillAppear = splitViewController!.collapsed
+        
         super.viewWillAppear(animated)
     }
     
@@ -75,7 +76,7 @@ class PalmSpringsTableViewController: UITableViewController, ADBannerViewDelegat
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.active && searchController.searchBar.text != "" {
+        if searchController.active && (searchController.searchBar.text != "" || !filteredHouse.isEmpty) {
             return filteredHouse.count
         }
         return House.count
@@ -86,7 +87,10 @@ class PalmSpringsTableViewController: UITableViewController, ADBannerViewDelegat
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         let house: Home
-        if searchController.active && searchController.searchBar.text != "" {
+        
+        
+        if searchController.active && (searchController.searchBar.text != "" || !filteredHouse.isEmpty) {
+            
             house = filteredHouse[indexPath.row]
         } else {
             house = House[indexPath.row]
@@ -97,33 +101,46 @@ class PalmSpringsTableViewController: UITableViewController, ADBannerViewDelegat
     }
     
     func filterContentForSearchText(searchText: String, scope: String = "All") {
-        filteredHouse = House.filter({( candy : Home) -> Bool in
-            let categoryMatch = (scope == "All") || (candy.category == scope)
-            return categoryMatch && candy.name.lowercaseString.containsString(searchText.lowercaseString)
+        
+        filteredHouse = House.filter({ house -> Bool in
+            let categoryMatch = (scope == "All") || (house.category == scope)
+            if searchText.isEmpty {
+                return categoryMatch
+            } else {
+                return categoryMatch && house.name.lowercaseString.containsString(searchText.lowercaseString)
+            }
         })
         tableView.reloadData()
     }
     
     // MARK: - Segues
+    // MARK: - Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetailPalmSprings" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let house: Home
-                if searchController.active && searchController.searchBar.text != "" {
+                if searchController.active && (searchController.searchBar.text != "" || !filteredHouse.isEmpty) {
                     house = filteredHouse[indexPath.row]
                 } else {
                     house = House[indexPath.row]
                 }
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+                let tabBar = segue.destinationViewController as? TBViewController
+                let controller = tabBar?.viewControllers![0] as! DetailViewController
+                let secondController = tabBar?.viewControllers![1] as! SecondDetailViewController
+                
                 controller.detailHouse = house
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
+                secondController.detailHouse = house
+                tabBar?.detailHouse = house
+                secondController.navigationItem.leftItemsSupplementBackButton = true
                 controller.navigationItem.leftItemsSupplementBackButton = true
+                
                 delay(0.5, closure: { () -> () in
                     self.dismissViewControllerAnimated(true, completion: nil)
-                })            }
+                })
+                
+            }
         }
     }
-    
     func bannerViewWillLoadAd(banner: ADBannerView!) {
         
         NSLog("Ad Loaded")

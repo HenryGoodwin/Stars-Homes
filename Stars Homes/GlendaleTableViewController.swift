@@ -13,6 +13,8 @@ class GlendaleTableViewController: UITableViewController, ADBannerViewDelegate {
     
     @IBOutlet var adBannerView: ADBannerView?
     
+
+    
     // MARK: - Properties
     var detailViewController: DetailViewController? = nil
     var House = [Home]()
@@ -31,6 +33,8 @@ class GlendaleTableViewController: UITableViewController, ADBannerViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         self.canDisplayBannerAds = true
         self.adBannerView?.delegate = self
         self.adBannerView?.hidden = true
@@ -40,30 +44,30 @@ class GlendaleTableViewController: UITableViewController, ADBannerViewDelegate {
         searchController.searchBar.delegate = self
         definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search For A Star"
         
         // Setup the Scope Bar
-        searchController.searchBar.scopeButtonTitles = ["All", "Film & TV", "Music", "Sport", "Iconic" ,"Other"]
+        searchController.searchBar.scopeButtonTitles = ["All", "Other"]
         tableView.tableHeaderView = searchController.searchBar
         
         
         House = [
             
-            Home(category:"Other", name:"Nicole Richie", URL: "https://en.wikipedia.org/wiki/Nicole_Richie", pinLatitude: 34.170553 , pinLongitude : -118.268032, pinDetail : "1516 Hillcrest Ave, Glendale", pinTitle: "Nicole Richie"),
-            
-            Home(category:"", name:"", URL: "", pinLatitude: 0 , pinLongitude : 0 , pinDetail : "", pinTitle: ""),]
+            Home(category:"Other", name:"Nicole Richie", URL: "https://en.wikipedia.org/wiki/Nicole_Richie", pinLatitude: 34.170553 , pinLongitude : -118.268032, pinDetail : "1516 Hillcrest Ave, Glendale", pinTitle: "Nicole Richie")]
         
         
-        
-        
-        if let splitViewController = splitViewController {
-            let controllers = splitViewController.viewControllers
-            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
-    }
     
     override func viewWillAppear(animated: Bool) {
-        clearsSelectionOnViewWillAppear = splitViewController!.collapsed
+        
         super.viewWillAppear(animated)
+    }
+    
+    deinit{
+        if let superView = searchController.view.superview
+        {
+            superView.removeFromSuperview()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -76,7 +80,7 @@ class GlendaleTableViewController: UITableViewController, ADBannerViewDelegate {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.active && searchController.searchBar.text != "" {
+        if searchController.active && (searchController.searchBar.text != "" || !filteredHouse.isEmpty) {
             return filteredHouse.count
         }
         return House.count
@@ -87,7 +91,10 @@ class GlendaleTableViewController: UITableViewController, ADBannerViewDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         let house: Home
-        if searchController.active && searchController.searchBar.text != "" {
+        
+        
+        if searchController.active && (searchController.searchBar.text != "" || !filteredHouse.isEmpty) {
+            
             house = filteredHouse[indexPath.row]
         } else {
             house = House[indexPath.row]
@@ -98,34 +105,48 @@ class GlendaleTableViewController: UITableViewController, ADBannerViewDelegate {
     }
     
     func filterContentForSearchText(searchText: String, scope: String = "All") {
-        filteredHouse = House.filter({( candy : Home) -> Bool in
-            let categoryMatch = (scope == "All") || (candy.category == scope)
-            return categoryMatch && candy.name.lowercaseString.containsString(searchText.lowercaseString)
+        
+        filteredHouse = House.filter({ house -> Bool in
+            let categoryMatch = (scope == "All") || (house.category == scope)
+            if searchText.isEmpty {
+                return categoryMatch
+            } else {
+                return categoryMatch && house.name.lowercaseString.containsString(searchText.lowercaseString)
+            }
         })
         tableView.reloadData()
     }
     
     // MARK: - Segues
+    // MARK: - Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetailGlendale" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let house: Home
-                if searchController.active && searchController.searchBar.text != "" {
+                if searchController.active && (searchController.searchBar.text != "" || !filteredHouse.isEmpty){
                     house = filteredHouse[indexPath.row]
                 } else {
                     house = House[indexPath.row]
                 }
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+                
+                let tabBar = segue.destinationViewController as? TBViewController
+                let controller = tabBar?.viewControllers![0] as! DetailViewController
+                let secondController = tabBar?.viewControllers![1] as! SecondDetailViewController
+                
                 controller.detailHouse = house
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
+                secondController.detailHouse = house
+                tabBar?.detailHouse = house
+                secondController.navigationItem.leftItemsSupplementBackButton = true
                 controller.navigationItem.leftItemsSupplementBackButton = true
+                
                 delay(0.5, closure: { () -> () in
                     self.dismissViewControllerAnimated(true, completion: nil)
                 })
+                
             }
         }
+        
     }
-    
     func bannerViewWillLoadAd(banner: ADBannerView!) {
         
         NSLog("Ad Loaded")

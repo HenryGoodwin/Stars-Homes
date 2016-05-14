@@ -11,6 +11,8 @@ import iAd
 
 class HiddenHillsTableViewController: UITableViewController, ADBannerViewDelegate {
     
+    //showDetailHiddenHills
+    
     @IBOutlet var adBannerView: ADBannerView?
     
     // MARK: - Properties
@@ -23,6 +25,11 @@ class HiddenHillsTableViewController: UITableViewController, ADBannerViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation){
+            self.adBannerView?.hidden = true
+            
+        }
+        
         self.canDisplayBannerAds = true
         self.adBannerView?.delegate = self
         self.adBannerView?.hidden = true
@@ -32,25 +39,27 @@ class HiddenHillsTableViewController: UITableViewController, ADBannerViewDelegat
         searchController.searchBar.delegate = self
         definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search For A Star"
         
         // Setup the Scope Bar
-        searchController.searchBar.scopeButtonTitles = ["All", "Film & TV", "Music", "Sport", "Other"]
+        searchController.searchBar.scopeButtonTitles = ["All", "Film & TV"]
         tableView.tableHeaderView = searchController.searchBar
         
         
         House = [
             Home(category:"Film & TV", name:"Jennifer Lopez",URL: "https://en.wikipedia.org/wiki/Jennifer_Lopez", pinLatitude: 34.159033 , pinLongitude : -118.668873, pinDetail : "25067 Jim Bridger Rd, Hidden Hills", pinTitle: "Jennifer Lopez"),]
         
-        
-        
-        if let splitViewController = splitViewController {
-            let controllers = splitViewController.viewControllers
-            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+        }
+    
+    deinit{
+        if let superView = searchController.view.superview
+        {
+            superView.removeFromSuperview()
         }
     }
     
     override func viewWillAppear(animated: Bool) {
-        clearsSelectionOnViewWillAppear = splitViewController!.collapsed
+        
         super.viewWillAppear(animated)
     }
     
@@ -64,7 +73,7 @@ class HiddenHillsTableViewController: UITableViewController, ADBannerViewDelegat
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.active && searchController.searchBar.text != "" {
+        if searchController.active && (searchController.searchBar.text != "" || !filteredHouse.isEmpty) {
             return filteredHouse.count
         }
         return House.count
@@ -75,7 +84,10 @@ class HiddenHillsTableViewController: UITableViewController, ADBannerViewDelegat
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         let house: Home
-        if searchController.active && searchController.searchBar.text != "" {
+        
+        
+        if searchController.active && (searchController.searchBar.text != "" || !filteredHouse.isEmpty) {
+            
             house = filteredHouse[indexPath.row]
         } else {
             house = House[indexPath.row]
@@ -86,32 +98,47 @@ class HiddenHillsTableViewController: UITableViewController, ADBannerViewDelegat
     }
     
     func filterContentForSearchText(searchText: String, scope: String = "All") {
-        filteredHouse = House.filter({( candy : Home) -> Bool in
-            let categoryMatch = (scope == "All") || (candy.category == scope)
-            return categoryMatch && candy.name.lowercaseString.containsString(searchText.lowercaseString)
+        
+        filteredHouse = House.filter({ house -> Bool in
+            let categoryMatch = (scope == "All") || (house.category == scope)
+            if searchText.isEmpty {
+                return categoryMatch
+            } else {
+                return categoryMatch && house.name.lowercaseString.containsString(searchText.lowercaseString)
+            }
         })
         tableView.reloadData()
     }
     
     // MARK: - Segues
+    // MARK: - Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetailHiddenHills" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let house: Home
-                if searchController.active && searchController.searchBar.text != "" {
+                if searchController.active && (searchController.searchBar.text != "" || !filteredHouse.isEmpty){
                     house = filteredHouse[indexPath.row]
                 } else {
                     house = House[indexPath.row]
                 }
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+                
+                let tabBar = segue.destinationViewController as? TBViewController
+                let controller = tabBar?.viewControllers![0] as! DetailViewController
+                let secondController = tabBar?.viewControllers![1] as! SecondDetailViewController
+                
                 controller.detailHouse = house
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
+                secondController.detailHouse = house
+                tabBar?.detailHouse = house
+                secondController.navigationItem.leftItemsSupplementBackButton = true
                 controller.navigationItem.leftItemsSupplementBackButton = true
+                
                 delay(0.5, closure: { () -> () in
                     self.dismissViewControllerAnimated(true, completion: nil)
                 })
+                
             }
         }
+        
     }
     
     func bannerViewWillLoadAd(banner: ADBannerView!) {

@@ -31,6 +31,7 @@ class BrentwoodTableViewController: UITableViewController, ADBannerViewDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         self.canDisplayBannerAds = true
         self.adBannerView?.delegate = self
         self.adBannerView?.hidden = true
@@ -40,9 +41,10 @@ class BrentwoodTableViewController: UITableViewController, ADBannerViewDelegate 
         searchController.searchBar.delegate = self
         definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search For A Star"
         
         // Setup the Scope Bar
-        searchController.searchBar.scopeButtonTitles = ["All", "Film & TV", "Music", "Sport", "Iconic" ,"Other"]
+        searchController.searchBar.scopeButtonTitles = ["All", "Film & TV", "Iconic"]
         tableView.tableHeaderView = searchController.searchBar
         
         
@@ -50,19 +52,22 @@ class BrentwoodTableViewController: UITableViewController, ADBannerViewDelegate 
             
         Home(category:"Iconic", name:"Modern Family Jay & Gloria", URL: "https://en.wikipedia.org/wiki/Modern_Family", pinLatitude: 34.059955 , pinLongitude :  -118.489400, pinDetail : "251 N Bristol Ave, Brentwood", pinTitle: "Modern Family Jay & Gloria"),
         
-        Home(category:"Film & TV", name:"Eva Marie Saint", URL: "https://en.wikipedia.org/wiki/Eva_Marie_Saint", pinLatitude: 34.081338 , pinLongitude : -118.501082 , pinDetail : "2410 Mandeville Canyon Rd, Brentwood", pinTitle: "Eva Marie Saint"),]
+        Home(category:"Film & TV", name:"Eva Marie Saint", URL: "https://en.wikipedia.org/wiki/Eva_Marie_Saint", pinLatitude: 34.081338 , pinLongitude : -118.501082 , pinDetail : "2410 Mandeville Canyon Rd, Brentwood", pinTitle: "Eva Marie Saint"),
+        
+        Home(category:"Film & TV", name:"Tracey Ullman", URL: "https://en.wikipedia.org/wiki/Tracey_Ullman", pinLatitude: 34.079758, pinLongitude :  -118.486876 , pinDetail : "1200 N Tigertail Rd, Brentwood", pinTitle: "Tracey Ullman"),]
         
         
-        
-        
-        if let splitViewController = splitViewController {
-            let controllers = splitViewController.viewControllers
-            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+    }
+    
+    deinit{
+        if let superView = searchController.view.superview
+        {
+            superView.removeFromSuperview()
         }
     }
     
     override func viewWillAppear(animated: Bool) {
-        clearsSelectionOnViewWillAppear = splitViewController!.collapsed
+        
         super.viewWillAppear(animated)
     }
     
@@ -76,7 +81,7 @@ class BrentwoodTableViewController: UITableViewController, ADBannerViewDelegate 
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.active && searchController.searchBar.text != "" {
+        if searchController.active && (searchController.searchBar.text != "" || !filteredHouse.isEmpty) {
             return filteredHouse.count
         }
         return House.count
@@ -87,7 +92,10 @@ class BrentwoodTableViewController: UITableViewController, ADBannerViewDelegate 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         let house: Home
-        if searchController.active && searchController.searchBar.text != "" {
+        
+        
+        if searchController.active && (searchController.searchBar.text != "" || !filteredHouse.isEmpty) {
+            
             house = filteredHouse[indexPath.row]
         } else {
             house = House[indexPath.row]
@@ -98,34 +106,47 @@ class BrentwoodTableViewController: UITableViewController, ADBannerViewDelegate 
     }
     
     func filterContentForSearchText(searchText: String, scope: String = "All") {
-        filteredHouse = House.filter({( candy : Home) -> Bool in
-            let categoryMatch = (scope == "All") || (candy.category == scope)
-            return categoryMatch && candy.name.lowercaseString.containsString(searchText.lowercaseString)
+        
+        filteredHouse = House.filter({ house -> Bool in
+            let categoryMatch = (scope == "All") || (house.category == scope)
+            if searchText.isEmpty {
+                return categoryMatch
+            } else {
+                return categoryMatch && house.name.lowercaseString.containsString(searchText.lowercaseString)
+            }
         })
         tableView.reloadData()
     }
     
     // MARK: - Segues
+    // MARK: - Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetailBrentwood" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let house: Home
-                if searchController.active && searchController.searchBar.text != "" {
+                if searchController.active && (searchController.searchBar.text != "" || !filteredHouse.isEmpty) {
                     house = filteredHouse[indexPath.row]
                 } else {
                     house = House[indexPath.row]
                 }
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+                
+                let tabBar = segue.destinationViewController as? TBViewController
+                let controller = tabBar?.viewControllers![0] as! DetailViewController
+                let secondController = tabBar?.viewControllers![1] as! SecondDetailViewController
+                
                 controller.detailHouse = house
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
+                secondController.detailHouse = house
+                tabBar?.detailHouse = house
+                secondController.navigationItem.leftItemsSupplementBackButton = true
                 controller.navigationItem.leftItemsSupplementBackButton = true
+                
                 delay(0.5, closure: { () -> () in
                     self.dismissViewControllerAnimated(true, completion: nil)
                 })
+                
             }
         }
     }
-    
     func bannerViewWillLoadAd(banner: ADBannerView!) {
         
         NSLog("Ad Loaded")
@@ -144,7 +165,7 @@ class BrentwoodTableViewController: UITableViewController, ADBannerViewDelegate 
 
 extension BrentwoodTableViewController: UISearchBarDelegate {
     // MARK: - UISearchBar Delegate
-    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+    func searchBar(searchBar: UISearchBar,selectedScopeButtonIndexDidChange selectedScope: Int) {
         filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
 }
